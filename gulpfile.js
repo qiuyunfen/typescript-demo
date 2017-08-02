@@ -4,6 +4,8 @@ var tsproject = ts.createProject('tsconfig.json');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var tsify = require('tsify');
+var gutil = require("gulp-util");
+var watchify = require('watchify');
 
 var paths = {
     pages:[
@@ -15,20 +17,23 @@ gulp.task('copy-html', function() {
     .pipe(gulp.dest('dist'));
 });
 
-
-gulp.task('default', ['copy-html'], function() {
-    return browserify({
+var watchBrowserify = watchify(browserify({
         basedir: '.',
         debug: true,
         entries: ['src/main.ts'],
         cache: {},
         packageCache: {}
-    })
-    .plugin(tsify)
+}).plugin(tsify));
+
+function bundle() {
+    return watchBrowserify
     .bundle()
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist'));
-});
+}
+gulp.task('default', ['copy-html'], bundle);
+watchBrowserify.on("update", bundle);
+watchBrowserify.on("log", gutil.log);
 // gulp.task('default', function() {
 //     return tsproject.src()
 //     .pipe(tsproject())
