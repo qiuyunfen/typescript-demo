@@ -7,6 +7,11 @@ var Student = (function () {
     }
     return Student;
 }());
+var persontest = {
+    id: 123,
+    firstName: 'hello',
+    lastName: 'world'
+};
 function greeter(person) {
     return 'Hello,' + person.firstName + person.lastName;
 }
