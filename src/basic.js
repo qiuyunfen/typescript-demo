@@ -61,3 +61,30 @@ function reverse(x) {
         return x.split('').reverse().join('');
     }
 }
+function getName(n) {
+    if (typeof n === 'number') {
+        return n.toString();
+    }
+    return n;
+}
+//元祖， 类型不一致的数组
+var xliu = ['xliu', 25];
+//xcatliu2[2]  满足联合类型string | number
+var xcatliu2;
+xcatliu2 = ['Xcat Liu', 25, 'http://xcatliu.com/'];
+//枚举
+var Days;
+(function (Days) {
+    Days[Days["Sun"] = 0] = "Sun";
+    Days[Days["Mon"] = 1] = "Mon";
+    Days[Days["Tue"] = 1] = "Tue";
+    Days[Days["Wed"] = 2] = "Wed";
+    Days[Days["Thu"] = 3] = "Thu";
+    Days[Days["Fri"] = 4] = "Fri";
+    Days[Days["Sat"] = 5] = "Sat";
+})(Days || (Days = {}));
+;
+console.log(Days['Sun'] === 0);
+console.log(Days[0] === 'Sun');
+console.log(Days['Mon']);
+console.log(Days['Wed']);

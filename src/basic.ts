@@ -79,3 +79,27 @@ function reverse(x: number | string) : number | string {
     }
 }
 
+//使用type定义类型别名，常用于联合类型
+type NumberOrString = number | string;
+function getName(n: NumberOrString) : string {
+    if(typeof n === 'number') {
+        return n.toString();
+    }
+    return n;
+}
+
+//元祖， 类型不一致的数组
+let xliu:[string, number] = ['xliu',25];
+
+//xcatliu2[2]  满足联合类型string | number
+let xcatliu2: [string, number];
+xcatliu2 = ['Xcat Liu', 25, 'http://xcatliu.com/'];
+
+//枚举
+enum Days {Sun, Mon, Tue = 1, Wed, Thu, Fri, Sat};
+console.log(Days['Sun'] === 0);
+console.log(Days[0] === 'Sun');
+console.log(Days['Mon']);
+console.log(Days['Wed']);
+
+
